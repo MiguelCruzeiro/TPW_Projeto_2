@@ -20,6 +20,8 @@ export class NewsCardDarkComponent {
   @Input() is_saved: boolean = false;
   @Input() publisher: string | undefined;
 
+  currentUser: any = localStorage.getItem('currentUser');
+
 
 
 
