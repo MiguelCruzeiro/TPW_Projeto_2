@@ -4,6 +4,8 @@ import {ApiDataService} from "../api-data.service";
 import {NgIf, NgFor} from "@angular/common";
 import { Router } from '@angular/router';
 import { interest } from '../interfaces';
+import { AuthService } from '../auth.service';
+import {user} from "../interfaces";
 
 @Component({
   selector: 'app-news-card-dark',
@@ -20,7 +22,8 @@ export class NewsCardDarkComponent {
   @Input() is_saved: boolean = false;
   @Input() publisher: string | undefined;
 
-  currentUser: any = localStorage.getItem('currentUser');
+  authservice = inject(AuthService);
+  currentUser: any = null;
 
 
 
@@ -66,6 +69,8 @@ export class NewsCardDarkComponent {
   }
 
   constructor(private router: Router) {
+
+    this.currentUser = this.authservice.getUser();
 
     this.ApiDataService.getInterests().then((interests : any) => {
       for (let i = 0; i < interests.length; i++) {
